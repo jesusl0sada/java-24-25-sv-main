@@ -16,19 +16,47 @@ public class ejercicio3 {
             }
             System.out.println("");
         }
-        String cadenaUsuario = "";
-        for (int i = 0; i <3; i++) {
+        for (int i = 0; i < 3; i++) {
             System.out.println("Escribe un número");
-            cadenaUsuario = lector.next();
-            for (int i = 0; i < 10 ; i++); {
-                if (numerosrandommatriz == cadenaUsuario);
+            String cadenaUsuario = lector.next();
+            int numeroUsuario = Integer.parseInt(cadenaUsuario);
+            boolean encontrado = false;
 
-                for (int j = 0; j <10 ; j++) {
-                    if (numerosrandommatriz == cadenaUsuario); {
+
+            //COMPARAR Y REEMPLAZAR
+            // VOLVEMOS A RECORRER EL ARRAY CON UN FOR -> CONTADOR
+            // EN CASO DE QUE SE ENCUENTRE Y SEA EL MISMO, ES DECIR SE TIENEN QUE SUSTITUIR.
+            for (int x = 0; x < 10; x++) {
+                for (int y = 0; y < 10; y++) {
+                    if (Matriz[x][y] == numeroUsuario) {
+                        Matriz[x][y] = -1;
+                        encontrado = true;
 
                     }
                 }
             }
-        }
+            // EN CASO DE QUE SEAN DISTINTOS.
+            if (encontrado == false) { // distinto de !
+                System.out.println("El número no pertenece al array.");
+            }
+// VOLVEMOS A IMPRIMIR LA MATRIZ CON LOS CAMBIOS EFECTUADOS//.
+            //PARA ELLO LA TENEMOS QUE VOLVER A RECORRER CON EL CONTADOR
+            for (int x = 0; x < 10; x++) {
+                for (int y = 0; y < 10; y++) {
+                    if (Matriz[x][y] == -1) {
+                        System.out.print("X ");
+                    } else {
+                        System.out.print(Matriz[x][y] + " ");
+                    }
+                }
+                    System.out.println("");
+                }
+            }
+        lector.close();
     }
 }
+
+
+
+
+
