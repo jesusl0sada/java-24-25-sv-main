@@ -48,21 +48,20 @@ public class video3simpson {
             columnaBart = columnaAleatorio;
         }
     }
-//    private static void asignarCaracterACasillasLibres(char caracter){
-//        Random aleatorio = new Random();
-//        // 6º) Repartir 10 Homer dentro del tablero
-//        int filaAleatorioHomer;
-//        int columnaAleatorioHomer;
-//        for (int i = 0; i < 10; i++) {
-//            do{
-//                filaAleatorioHomer = aleatorio.nextInt(MAX_FILA_TABLERO);//0-9
-//                columnaAleatorioHomer = aleatorio.nextInt(MAX_COLUMNA_TABLERO);//0-9
-//            }while (tablero[filaAleatorioHomer][columnaAleatorioHomer]!='L');
-//            // Cuando tablero[filaAleatorioHomer][columnaAleatorioHomer]='L'
-//            tablero[filaAleatorioHomer][columnaAleatorioHomer] = caracter;
-//        }
-//    }
-
+    private static void asignarCaracterACasillasLibres(char caracter){
+        Random aleatorio = new Random();
+        // 6º) Repartir 10 Homer dentro del tablero
+          int filaAleatorioHomer;
+          int columnaAleatorioHomer;
+          for (int i = 0; i < 10; i++) {
+              do{
+                filaAleatorioHomer = aleatorio.nextInt(MAX_FILA_TABLERO);//0-9
+                columnaAleatorioHomer = aleatorio.nextInt(MAX_COLUMNA_TABLERO);//0-9
+            }while (tablero[filaAleatorioHomer][columnaAleatorioHomer]!='L');
+           // Cuando tablero[filaAleatorioHomer][columnaAleatorioHomer]='L'
+            tablero[filaAleatorioHomer][columnaAleatorioHomer] = caracter;
+        }
+    }
     public static void main(String[] args) {
         // 1º) Inicializo mi matriz tablero
         tablero = new char[MAX_FILA_TABLERO][MAX_COLUMNA_TABLERO];

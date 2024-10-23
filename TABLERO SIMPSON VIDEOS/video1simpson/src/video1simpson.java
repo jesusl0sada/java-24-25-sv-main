@@ -12,7 +12,7 @@ public class video1simpson {
         // 1º) Inicializo la variable de tablero con filas y columnas, pero aún no tienen valores, solo tenemos el hueco.
         tablero = new char[MAX_FILA_TABLERO][MAX_COLUMNA_TABLERO]; // es como si tenemos en excel 10x10 casillas vacías que tenemso que llenar ahora.
         //2º) Rellenar el tablero 'L' a partir de un eje de coordenadas, como si fueran en excel la fila y columna
-        for (int i = 0; i < MAX_FILA_TABLERO; i++) { // LO RELLENAMOS CON BUCLES, EN ESTE CASO FORI
+        for (int i = 0; i < MAX_FILA_TABLERO; i++) { //
             for (int j = 0; j < MAX_COLUMNA_TABLERO; j++) {
                 // señalamos el tablero q es la matriz, como si fueran las sillas, llenalo de L.
                 // [0,0] [1,0], [2,0], [3,0], es decir llena primero columnas, luego filas, se ejecuta el bucle hasta el máximo de la columna del tablero, entonces dirá que no es mayor que lo que hemos definido y empezará a llenar lo otro.

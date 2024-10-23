@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3810217e-2b54-4564-a5d5-e734ed318d92" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/video1simpson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/video1simpson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../video3simpson/src/video3simpson.java" beforeDir="false" afterPath="$PROJECT_DIR$/../video3simpson/src/video3simpson.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +26,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/JESÚS LOSADA/GITHUB/java-24-25-sv-main/TABLERO SIMPSON VIDEOS/video1simpson&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;D:/JESÚS LOSADA/GITHUB/vista videos simpson/video1simpson/src/Main.java&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.updates&quot;
   }
@@ -58,5 +61,20 @@
       <updated>1728985518949</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/video1simpson.java</url>
+          <line>10</line>
+          <properties class="video1simpson.video1simpson" method="main">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
