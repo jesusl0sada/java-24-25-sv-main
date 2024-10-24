@@ -64,7 +64,7 @@ public class Main {
             intentos = intentos - 1;
             System.out.println("Intentos restantes: " + intentos);
         } else {
-            System.out.println("¡Número encontrado!")
+            System.out.println("¡Número encontrado!");
             intentos = intentos-1;
             System.out.println("Intentos restantes: " +  intentos );
 
