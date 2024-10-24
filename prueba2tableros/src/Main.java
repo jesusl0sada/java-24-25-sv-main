@@ -5,12 +5,12 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Main {
-    static int Intentos=10;
+    static int intentos=10;
     static int[][] tablerooculto = new int[10][10];
     static String[][] tablerousuario = new String[10][10];
 
     // Generar el tablero oculto con números aleatorios
-    public static void TableroOculto() {
+    public static void tableroOculto() {
         Random randomizartablero = new Random();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -18,7 +18,7 @@ public class Main {
             }
         }
     }
-    public static void ImprimirTableroOculto() {
+    public static void imprimirTableroOculto() {
         System.out.println("Este es el tablero oculto:");
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -27,7 +27,7 @@ public class Main {
             System.out.println("");
         }
     }
-    public static void TableroUsuario() {
+    public static void tableroUsuario() {
         System.out.println("Este es el tablero del usuario:");
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -39,17 +39,17 @@ public class Main {
     }
 
     // Preguntar al usuario por 10 números
-    public static void PreguntaAlUsuario() {
+    public static void preguntaalUsuario() {
         Scanner lector = new Scanner(System.in);
         for (int k = 0; k < 10; k++) {
             System.out.println("Introduce un número que creas que está en el tablero:");
             int numerosuario = lector.nextInt();
-            Comprobarcoincidencia(numerosuario);
+            comprobarcoincidencia(numerosuario);
         }
     }
 
     // Comprobar si el número del usuario está en el tablero oculto y revelar su posición
-    public static void Comprobarcoincidencia(int numerosuario) {
+    public static void comprobarcoincidencia(int numerosuario) {
         boolean encontrado = false;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -61,12 +61,12 @@ public class Main {
         }
         if (!encontrado) {
             System.out.println("El número " + numerosuario + " no está en el tablero.");
-            Intentos = Intentos - 1;
-            System.out.println("Intentos restantes: " + Intentos);
+            intentos = intentos - 1;
+            System.out.println("Intentos restantes: " + intentos);
         } else {
-            System.out.println("¡Número encontrado!");
-            Intentos = Intentos-1;
-            System.out.println("Intentos restantes: " +  Intentos );
+            System.out.println("¡Número encontrado!")
+            intentos = intentos-1;
+            System.out.println("Intentos restantes: " +  intentos );
 
         }
         ImprimirTableroUsuario();
@@ -74,7 +74,7 @@ public class Main {
 
     // Imprimir el tablero del usuario con las coincidencias reveladas
     public static void ImprimirTableroUsuario() {
-        System.out.println("Tablero del usuario actualizado:");
+        System.out.println("PRUEBA DE NUEVO EN EL TABLERO:");
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 System.out.print(tablerousuario[i][j] + " ");
@@ -83,9 +83,9 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        TableroOculto();  // Generar el tablero oculto
-        TableroUsuario(); // Inicializar el tablero de usuario
-        PreguntaAlUsuario(); // Pedir números al usuario
+        tableroOculto();  // Generar el tablero oculto
+        tableroUsuario(); // Inicializar el tablero de usuario
+        preguntaalUsuario();// Pedir números al usuario
     }
 }
 
