@@ -227,8 +227,9 @@ public class Main {
 
 // TABLERO YODA
 
-
+/*
         System.out.println("TABLERO YODA");
+
         inicializartableroYoda();
         llenartablerodeYoda();
         llenartablerodeMaul();
@@ -240,12 +241,13 @@ public class Main {
             System.out.println("Introduce un movimiento (W/A/S/D/Q/E/Z/C): ");
             char movimiento = sc.next().charAt(0);
             moverYoda(movimiento);
-
+*/
             // FIN TABLERO YODA
             //SEPARACIÓN
             // TABLERO VADER
 
-        /*
+
+
         System.out.println("TABLERO DARTH VADER:");
         System.out.println("");
             inicializartableroVader();
@@ -254,11 +256,16 @@ public class Main {
             llenartablerovaderdeMuros();
             casillafinalvader();
             imprimirtableroVader();
-        */
+
 
         }
     }
-}
+
+
+
+
+
+
 
 
 
