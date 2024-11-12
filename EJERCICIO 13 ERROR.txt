@@ -1,0 +1,2 @@
+EJERCICIO 13 ERROR EXPLICACIÓN:
+index out of bounds: quiere decir que es un valor que no está en el array; se sale del array, no está en memoria. 
