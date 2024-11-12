@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class Main {
     // Constantes que definen el tamaño del tablero.
-    static final int FILAS = 5; // Número de filas del tablero.
-    static final int COLUMNAS = 5; // Número de columnas del tablero.
+    static final int FILAS = 6; // Número de filas del tablero.
+    static final int COLUMNAS = 6; // Número de columnas del tablero.
 
     // Declaramos una matriz 2D de caracteres que representará el tablero.
     static char[][] tablero = new char[FILAS][COLUMNAS];
@@ -13,7 +13,7 @@ public class Main {
     static Random rand = new Random();
 
     // Array de palabras que vamos a insertar en el tablero.
-    static String[] palabras = {"SOL", "LUNA", "MAR"};
+    static String[] palabras = {"SOL", "LUNA", "MAR", "DANI"};
 
     // Método principal que ejecuta el programa.
     public static void main(String[] args) {
@@ -54,32 +54,39 @@ public class Main {
             }
             // Hacemos un salto de línea al final de cada fila.
             System.out.println();
-        }
+        } 
     }
 
 
     //Método que intenta insertar cada palabra en una fila aleatoria.
 
     public static void insertarPalabras() {
-        // Recorremos cada palabra en el array de palabras.
         for (String palabra : palabras) {
-            boolean colocada = false; // Bandera que indica si la palabra fue colocada.
+            while (true) {
+                int fila = rand.nextInt(FILAS); // Fila aleatoria
+                int columna = rand.nextInt(COLUMNAS); // Columna aleatoria
 
-            // Intentamos colocar la palabra hasta que se logre.
-            while (!colocada) {
-                int filaAleatoria, columnaAleatoria; // definimos las variables donde guardaremos random las filas y columnas.
-                filaAleatoria = rand.nextInt(FILAS); // Generamos una fila aleatoria.
-                columnaAleatoria = rand.nextInt(COLUMNAS); // Generamos una columna aleatoria.
-
-                // Verificamos si la palabra cabe en la fila seleccionada.
-                if (columnaAleatoria + palabra.length() <= COLUMNAS) {
-                    // Insertamos la palabra horizontalmente si hay espacio suficiente.
-                    for (int k = 0; k < palabra.length(); k++) {
-                        tablero[filaAleatoria][columnaAleatoria + k] = palabra.charAt(k);
+                // Decidir aleatoriamente si la palabra se coloca horizontal o verticalmente
+                if (rand.nextBoolean()) {
+                    // Intentar colocar en horizontal
+                    if (columna + palabra.length() <= COLUMNAS) {
+                        for (int k = 0; k < palabra.length(); k++) {
+                            tablero[fila][columna + k] = palabra.charAt(k);
+                        }
+                        break; // Salimos del while, palabra colocada
                     }
-                    colocada = true; // Indicamos que la palabra fue colocada.
+                } else {
+                    // Intentar colocar en vertical
+                    if (fila + palabra.length() <= FILAS) {
+                        for (int k = 0; k < palabra.length(); k++) {
+                            tablero[fila + k][columna] = palabra.charAt(k);
+                        }
+                        break; // Salimos del while, palabra colocada
+                    }
                 }
             }
         }
     }
 }
+
+
