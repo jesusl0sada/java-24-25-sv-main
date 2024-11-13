@@ -1,265 +1,236 @@
-// IMPORTACIÓN DE HERRAMIENTAS.
 import java.util.Random;
 import java.util.Scanner;
+
 public class Main {
-    //DEFINIMOS TODAS LAS VARIABLES QUE VAMOS A EMPLEAR PARA HACER ESTO.
-    public static int MAXFILA = 10;
-    public static int MAXCOLUMNA = 10;
-    public static char darthvader = 'D';
-    public static char vacio = 'L';
-    public static char casillafinal = 'F';
-    public static char yoda = 'Y';
-    public static char r2d2 = 'R';
-    public static char muro = 'M';
-    public static int vidasYoda = 3;
-    public static int vidasVader = 3;
-    public static char tableroYODA[][] = new char[MAXFILA][MAXCOLUMNA];
-    public static char tableroVADER[][] = new char[MAXFILA][MAXCOLUMNA];
+    private static final int FILAS = 10;
+    private static final int COLUMNAS = 10;
+    private static char[][] campo1;
+    private static char[][] campo2;
+    private static int posicionYodaFila;
+    private static int posicionYodaColumna;
+    private static int posicionVaderFila;
+    private static int posicionVaderColumna;
+    static int saludVader = 3;
+    static int saludYoda = 3;
 
-    // COMENZAMOS DEFINIENDO DOS TABLEROS ALREDEDOR DE LOS QUE VAMOS A TRABAJAR.
-
-    // AQUÍ FUNCIONES DEL TABLERO YODA...
-    public static void inicializartableroYoda() { // primero vamos a crear un tablero que es el que va a contener 10x10 de yoda, con la Y, luego
-        for (int i = 0; i < MAXFILA; i++) {
-            for (int j = 0; j < MAXCOLUMNA; j++) {
-                tableroYODA[i][j] = vacio;
+    // Método para llenar el tablero con 'L' (espacios libres).
+    private static void llenarTablero1(char simbolo) {
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                campo1[i][j] = simbolo;
             }
         }
     }
 
-    // 1ERO METEMOS UN YODA
-    public static void llenartablerodeYoda() {
-        Random rand = new Random();
-        int filayoda, columnayoda; // como va a ser en una columna random lo creamos, va a crear esa variable.
-        do {
-            filayoda = rand.nextInt(MAXFILA);       // Genera una fila aleatoria.
-            columnayoda = rand.nextInt(MAXCOLUMNA); // Genera una columna aleatoria.
-        } while (tableroYODA[filayoda][columnayoda] != vacio); // Repite mientras la posición no esté vacía.
-
-        tableroYODA[filayoda][columnayoda] = yoda; // Coloca 'Y' una vez encontrada la posición vacía.
-    }
-
-    // 2DO METEMOS 5 DARTHMAULS
-    public static void llenartablerodeMaul() {
-        Random rand = new Random();
-        for (int i = 0; i < 5; i++) { // .
-            int filaMaul, columnaMaul;
-            do {
-                filaMaul = rand.nextInt(MAXFILA);
-                columnaMaul = rand.nextInt(MAXCOLUMNA);
-            } while (tableroYODA[filaMaul][columnaMaul] != vacio);
-            tableroYODA[filaMaul][columnaMaul] = darthvader;
+    private static void llenarTablero2(char simbolo) {
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                campo2[i][j] = simbolo;
+            }
         }
     }
 
-    // 3ERO METEMOS 5 MUROS
-    public static void llenartableroyodadeMuros() {
-        Random randomizarmuros = new Random();
-        for (int i = 0; i < 5; i++) {
-            int filaMuros, columnaMuros;
+    // Método para colocar personajes en el tablero de forma aleatoria.
+    private static void colocarPersonajesEnTablero1(char simbolo, int cantidad) {
+        Random aleatorio = new Random();
+        int filaRandomYoda = -1;
+        int columnaRandomYoda = -1;
+        for (int i = 0; i < cantidad; i++) {
             do {
-                filaMuros = randomizarmuros.nextInt(MAXFILA);
-                columnaMuros = randomizarmuros.nextInt(MAXCOLUMNA);
-            } while (tableroYODA[filaMuros][columnaMuros] != vacio);
-            tableroYODA[filaMuros][columnaMuros] = muro;
+                filaRandomYoda = aleatorio.nextInt(FILAS);
+                columnaRandomYoda = aleatorio.nextInt(COLUMNAS);
+            } while (campo1[filaRandomYoda][columnaRandomYoda] != 'L');
+            campo1[filaRandomYoda][columnaRandomYoda] = simbolo;
+        }
+        if (simbolo == 'Y') {
+            posicionYodaFila = filaRandomYoda;
+            posicionYodaColumna = columnaRandomYoda;
         }
     }
 
-    // 4O IMPRIMIMOS EL TABLERO YODA
-    public static void imprimirTableroyoda() {
-        for (int i = 0; i < MAXFILA; i++) {
-            for (int j = 0; j < MAXCOLUMNA; j++) {
-                System.out.print("[" + tableroYODA[i][j] + "]");
+    private static void colocarPersonajesEnTablero2(char simbolo, int cantidad) {
+        Random aleatorio = new Random();
+        int filaRandomVader = -1;
+        int columnaRandomVader = -1;
+        for (int i = 0; i < cantidad; i++) {
+            do {
+                filaRandomVader = aleatorio.nextInt(FILAS);
+                columnaRandomVader = aleatorio.nextInt(COLUMNAS);
+            } while (campo2[filaRandomVader][columnaRandomVader] != 'L');
+            campo2[filaRandomVader][columnaRandomVader] = simbolo;
+        }
+        if (simbolo == 'V') {
+            posicionVaderFila = filaRandomVader;
+            posicionVaderColumna = columnaRandomVader;
+        }
+    }
+
+    // Método para imprimir el tablero.
+    private static void mostrarTablero1() {
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                System.out.print(campo1[i][j] + " ");
             }
             System.out.println("");
         }
-    }
-    // TERMINADAS LAS FUNCIONES DEL TABLERO YODA
-
-    // INICIAMOS EL TABLERO VADER
-    public static void inicializartableroVader() {
-        for (int i = 0; i < MAXFILA; i++) {
-            for (int j = 0; j < MAXCOLUMNA; j++) {
-                tableroVADER[i][j] = vacio;
-            }
-        }
+        System.out.println("\n\n");
     }
 
-    public static void llenartablerodeVader() {
-        Random vaderrandom = new Random();
-        int filarandomVader, columnarandomVader;
-        for (int i = 0; i < 1; i++) {
-            do {
-                filarandomVader = vaderrandom.nextInt(MAXFILA);
-                columnarandomVader = vaderrandom.nextInt(MAXCOLUMNA);
-            } while (tableroVADER[filarandomVader][columnarandomVader] != vacio);
-            tableroVADER[filarandomVader][columnarandomVader] = darthvader;
-        }
-    }
-
-    public static void llenartableror2d2() {
-        //CREACIÓN DE VARIABLES DE LA FILA Y COLUMNA ALEATORIA EN DONDE SE DEPOSITARÁ LA LETRA.
-        Random randomizarr2d2 = new Random();
-        int filar2d2aleatoria, columnar2d2aleatoria;
-        for (int i = 0; i < 5; i++) {
-            do {
-                filar2d2aleatoria = randomizarr2d2.nextInt(MAXFILA);
-                columnar2d2aleatoria = randomizarr2d2.nextInt(MAXCOLUMNA);
-            } while (tableroVADER[filar2d2aleatoria][columnar2d2aleatoria] != vacio);
-            tableroVADER[filar2d2aleatoria][columnar2d2aleatoria] = r2d2;
-        }
-    }
-
-    public static void llenartablerovaderdeMuros() {
-        int filamuros, columnamuros;
-        Random randomizarmuros = new Random();
-        do {
-            filamuros = randomizarmuros.nextInt(MAXFILA);
-            columnamuros = randomizarmuros.nextInt(MAXCOLUMNA);
-        } while (tableroVADER[filamuros][columnamuros] != vacio);
-        tableroVADER[filamuros][columnamuros] = muro;
-    }
-
-    public static void casillafinalyoda() {
-        tableroYODA[9][9] = casillafinal;
-    }
-
-    public static void casillafinalvader() {
-        tableroVADER[9][9] = casillafinal;
-    }
-
-    public static void imprimirtableroVader() {
-        for (int i = 0; i < MAXFILA; i++) {
-            for (int j = 0; j < MAXCOLUMNA; j++) {
-                System.out.print("[" + tableroVADER[i][j] + "]");
+    private static void mostrarTablero2() {
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                System.out.print(campo2[i][j] + " ");
             }
             System.out.println("");
         }
-    }
-
-    public static void moverYoda(char direccion) {
-        int[] posicion = encontrarYoda(); // Ubica la posición actual de Yoda
-        int filaActual = posicion[0];
-        int columnaActual = posicion[1];
-
-        int nuevaFila = filaActual;
-        int nuevaColumna = columnaActual;
-        // GUARDA LAS FILAS EN LAS QUE HA ENCONTRADO A YODA EN FILA NUEVA Y COLUMNA NUEVA ->:
-
-        // Movimiento basado en la dirección
-        switch (direccion) {
-            case 'W': // Arriba
-                nuevaFila--;
-                break;
-            case 'S': // Abajo
-                nuevaFila++;
-                break;
-            case 'A': // Izquierda
-                nuevaColumna--;
-                break;
-            case 'D': // Derecha
-                nuevaColumna++;
-                break;
-            case 'Q': // Diagonal superior izquierda
-                nuevaFila--;
-                nuevaColumna--;
-                break;
-            case 'E': // Diagonal superior derecha
-                nuevaFila--;
-                nuevaColumna++;
-                break;
-            case 'Z': // Diagonal inferior izquierda
-                nuevaFila++;
-                nuevaColumna--;
-                break;
-            case 'C': // Diagonal inferior derecha
-                nuevaFila++;
-                nuevaColumna++;
-                break;
-            default:
-                System.out.println("Dirección no válida.");
-                return;
-        }
-
-        // Tablero infinito: corrige las coordenadas si se sale del tablero
-        nuevaFila = (nuevaFila + MAXFILA) % MAXFILA;
-        nuevaColumna = (nuevaColumna + MAXCOLUMNA) % MAXCOLUMNA;
-
-        // Validar la nueva posición
-        if (tableroYODA[nuevaFila][nuevaColumna] == muro) {
-            System.out.println("¡Chocaste con un muro! Intenta otra dirección.");
-            return;
-        }
-
-        if (tableroYODA[nuevaFila][nuevaColumna] == darthvader) {
-            vidasYoda--;
-            System.out.println("¡Darth Maul te ha atacado! Vidas restantes: " + vidasYoda);
-            if (vidasYoda == 0) {
-                System.out.println("Has perdido todas las vidas. ¡Juego terminado!");
-                System.exit(0);
-            }
-        } else if (tableroYODA[nuevaFila][nuevaColumna] == casillafinal) {
-            System.out.println("¡Has llegado a la meta! ¡Victoria!");
-            System.exit(0);
-        }
-
-        // Mover Yoda y limpiar la casilla anterior
-        tableroYODA[filaActual][columnaActual] = vacio;
-        tableroYODA[nuevaFila][nuevaColumna] = yoda;
-
-        imprimirTableroyoda();
-    }
-
-    public static int[] encontrarYoda() {
-        for (int i = 0; i < MAXFILA; i++) {
-            for (int j = 0; j < MAXCOLUMNA; j++) {
-                if (tableroYODA[i][j] == yoda) {
-                    return new int[]{i, j}; // Devuelve la posición [fila, columna].
-                }
-            }
-        }
-        return null; // No debería pasar si Yoda siempre está en el tablero.
+        System.out.println("\n\n");
     }
 
     public static void main(String[] args) {
+        campo1 = new char[FILAS][COLUMNAS];
+        llenarTablero1('L');
+        campo1[9][9] = 'F';  // Meta
+        colocarPersonajesEnTablero1('Y', 1); // Yoda
+        colocarPersonajesEnTablero1('D', 5); // Darth Maul
+        colocarPersonajesEnTablero1('M', 5); // Muro
+        colocarPersonajesEnTablero1('P', 5); // Poción
 
-        Scanner sc = new Scanner(System.in);
+        campo2 = new char[FILAS][COLUMNAS];
+        llenarTablero2('L');
+        campo2[9][9] = 'F';  // Meta
+        colocarPersonajesEnTablero2('V', 1); // Darth Vader
+        colocarPersonajesEnTablero2('R', 5); // R2D2
+        colocarPersonajesEnTablero2('M', 5); // Muro
+        colocarPersonajesEnTablero2('P', 5); // Poción
 
-// TABLERO YODA
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduce el nombre del primer jugador: ");
+        String jugador1 = scanner.nextLine();
+        System.out.println("Introduce el nombre del segundo jugador: ");
+        String jugador2 = scanner.nextLine();
 
-/*
-        System.out.println("TABLERO YODA");
+        while (saludYoda > 0 && saludVader > 0) {
+            mostrarTablero1();
+            System.out.println("Es el turno de " + jugador1 + " (Yoda)");
+            String movimientoYoda = scanner.nextLine().toUpperCase();
+            int pasosYoda = movimientoYoda.length() > 1 ? Integer.parseInt(movimientoYoda.substring(0, movimientoYoda.length() - 1)) : 1;
+            char direccionYoda = movimientoYoda.charAt(movimientoYoda.length() - 1);
 
-        inicializartableroYoda();
-        llenartablerodeYoda();
-        llenartablerodeMaul();
-        llenartableroyodadeMuros();
-        casillafinalyoda();
-        imprimirTableroyoda();
+            moverJugador(campo1, 'Y', direccionYoda, pasosYoda);
+            mostrarTablero1();
 
-        while (true) {
-            System.out.println("Introduce un movimiento (W/A/S/D/Q/E/Z/C): ");
-            char movimiento = sc.next().charAt(0);
-            moverYoda(movimiento);
-*/
-            // FIN TABLERO YODA
-            //SEPARACIÓN
-            // TABLERO VADER
+            try {
+                Thread.sleep(3000); // Pausa de 3 segundos
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
+            mostrarTablero2();
+            System.out.println("Es el turno de " + jugador2 + " (Vader)");
+            String movimientoVader = scanner.nextLine().toUpperCase();
+            int pasosVader = movimientoVader.length() > 1 ? Integer.parseInt(movimientoVader.substring(0, movimientoVader.length() - 1)) : 1;
+            char direccionVader = movimientoVader.charAt(movimientoVader.length() - 1);
 
+            moverJugador(campo2, 'V', direccionVader, pasosVader);
+            mostrarTablero2();
 
-        System.out.println("TABLERO DARTH VADER:");
-        System.out.println("");
-            inicializartableroVader();
-            llenartablerodeVader();
-            llenartableror2d2();
-            llenartablerovaderdeMuros();
-            casillafinalvader();
-            imprimirtableroVader();
+            try {
+                Thread.sleep(3000); // Pausa de 3 segundos
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
-
+        if (saludYoda <= 0) {
+            System.out.println(jugador1 + " ha perdido todas las vidas. ¡GAME OVER!");
+            System.out.println(jugador2 + " ha ganado!");
+        } else if (saludVader <= 0) {
+            System.out.println(jugador2 + " ha perdido todas las vidas. ¡GAME OVER!");
+            System.out.println(jugador1 + " ha ganado!");
         }
     }
+
+    // Método para mover los jugadores.
+    private static void moverJugador(char[][] campo, char jugador, char direccion, int pasos) {
+        int fila = jugador == 'Y' ? posicionYodaFila : posicionVaderFila;
+        int columna = jugador == 'Y' ? posicionYodaColumna : posicionVaderColumna;
+
+        for (int i = 0; i < pasos; i++) {
+            int filaAnterior = fila;
+            int columnaAnterior = columna;
+
+            switch (direccion) {
+                case 'A':
+                    columna = (columna - 1 + COLUMNAS) % COLUMNAS;
+                    break;
+                case 'D':
+                    columna = (columna + 1) % COLUMNAS;
+                    break;
+                case 'W':
+                    fila = (fila - 1 + FILAS) % FILAS;
+                    break;
+                case 'S':
+                    fila = (fila + 1) % FILAS;
+                    break;
+                case 'Q':
+                    fila = (fila - 1 + FILAS) % FILAS;
+                    columna = (columna - 1 + COLUMNAS) % COLUMNAS;
+                    break;
+                case 'E':
+                    fila = (fila - 1 + FILAS) % FILAS;
+                    columna = (columna + 1) % COLUMNAS;
+                    break;
+                case 'Z':
+                    fila = (fila + 1) % FILAS;
+                    columna = (columna - 1 + COLUMNAS) % COLUMNAS;
+                    break;
+                case 'C':
+                    fila = (fila + 1) % FILAS;
+                    columna = (columna + 1) % COLUMNAS;
+                    break;
+                default:
+                    System.out.println("Movimiento no válido.");
+                    return;
+            }
+
+            char posicionActual = campo[fila][columna];
+
+            if (posicionActual == 'D' && jugador == 'Y') {
+                saludYoda--;
+                System.out.println("Yoda ha perdido una vida. Le quedan " + saludYoda + " vidas.");
+            } else if (posicionActual == 'R' && jugador == 'V') {
+                saludVader--;
+                System.out.println("Vader ha perdido una vida. Le quedan " + saludVader + " vidas.");
+            } else if (posicionActual == 'M') {
+                System.out.println("Hay un muro. No puedes avanzar.");
+                return;
+            } else if (posicionActual == 'F') {
+                System.out.println("¡Felicitaciones! Has llegado al final.");
+                return;
+            }
+        }
+
+        if (jugador == 'Y') {
+            posicionYodaFila = fila;
+            posicionYodaColumna = columna;
+        } else {
+            posicionVaderFila = fila;
+            posicionVaderColumna = columna;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
