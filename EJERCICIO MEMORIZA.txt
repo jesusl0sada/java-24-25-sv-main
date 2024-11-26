@@ -1,0 +1,106 @@
+EJERCICIO MEMORIZA DEFINITIVO: 
+
+import java.util.Scanner; // Importa la clase Scanner para leer la entrada del usuario
+import java.util.Random; // Importa la clase Random para generar números aleatorios
+
+public class Main {
+    private static final int[][] tablero = new int[4][4]; // Matriz para almacenar los números del tablero
+    private static final boolean[][] revelados = new boolean[4][4]; // Matriz para marcar si una casilla ha sido revelada
+
+    public static void main(String[] args) throws InterruptedException {
+        inicializarTablero(); // Inicializa el tablero con números en parejas y los mezcla
+        Scanner scanner = new Scanner(System.in); // Crea un objeto Scanner para leer la entrada del usuario
+        while (!juegoTerminado()) { // Bucle principal que continúa hasta que el juego termine
+            imprimirTablero(); // Muestra el estado actual del tablero
+            System.out.println("[PAREJA1] Escribe el número de fila: ");
+            int fila1 = scanner.nextInt(); // Lee la fila de la primera casilla seleccionada
+            System.out.println("[PAREJA1] Escribe el número de columna: ");
+            int columna1 = scanner.nextInt(); // Lee la columna de la primera casilla seleccionada
+            System.out.println("[PAREJA2] Escribe el número de fila: ");
+            int fila2 = scanner.nextInt(); // Lee la fila de la segunda casilla seleccionada
+            System.out.println("[PAREJA2] Escribe el número de columna: ");
+            int columna2 = scanner.nextInt(); // Lee la columna de la segunda casilla seleccionada
+            if ((fila1 == fila2 && columna1 == columna2) || !coordenadasValidas(fila1, columna1) || !coordenadasValidas(fila2, columna2)) {
+                System.out.println("Coordenadas no válidas. Inténtalo de nuevo."); // Verifica si las coordenadas son válidas
+                continue; // Si no son válidas, vuelve al inicio del bucle
+            }
+            revelar(fila1, columna1); // Revela la primera casilla seleccionada
+            revelar(fila2, columna2); // Revela la segunda casilla seleccionada
+            imprimirTablero(); // Muestra el tablero con las casillas reveladas
+            if (tablero[fila1][columna1] != tablero[fila2][columna2]) {
+                System.out.println("¡No coinciden!"); // Indica que las casillas no coinciden
+                Thread.sleep(2000); // Espera 2 segundos para que el jugador pueda ver las casillas
+                System.out.println("");
+                tapar(fila1, columna1); // Vuelve a ocultar la primera casilla
+                tapar(fila2, columna2); // Vuelve a ocultar la segunda casilla
+            } else {
+                System.out.println("¡Pareja encontrada!"); // Indica que se ha encontrado una pareja
+            }
+        }
+        System.out.println("¡Felicidades! Has encontrado todas las parejas."); // Mensaje final del juego
+    }
+
+    private static void inicializarTablero() {
+        int[] numeros = new int[4 * 4]; // Crea un array para almacenar los números del 1 al 8 en parejas
+        for (int i = 0; i < 8; i++) {
+            numeros[2 * i] = i + 1; // Asigna el mismo número a dos posiciones consecutivas
+            numeros[2 * i + 1] = i + 1;
+        }
+        mezclarArray(numeros); // Mezcla el array para aleatorizar los números
+        int index = 0;
+        for (int i = 0; i < 4; i++) { // Recorre las filas del tablero
+            for (int j = 0; j < 4; j++) { // Recorre las columnas del tablero
+                tablero[i][j] = numeros[index++]; // Asigna los números mezclados al tablero
+                revelados[i][j] = false; // Inicializa todas las casillas como no reveladas
+            }
+        }
+    }
+
+    private static void mezclarArray(int[] array) {
+        Random random = new Random(); // Crea un objeto Random para generar números aleatorios
+        for (int i = array.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1); // Genera un índice aleatorio
+            int temp = array[i]; // Intercambia los elementos en las posiciones i y j
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+
+    private static boolean coordenadasValidas(int fila, int columna) {
+        return fila >= 0 && fila < 4 && columna >= 0 && columna < 4 && !revelados[fila][columna]; // Comprueba si las coordenadas son válidas y la casilla no ha sido revelada
+    }
+
+    private static void imprimirTablero() {
+        for (int i = 0; i < 4; i++) { // Recorre cada fila del tablero
+            for (int j = 0; j < 4; j++) { // Recorre cada columna del tablero
+                if (revelados[i][j]) {
+                    System.out.print(tablero[i][j] + " "); // Muestra el número si la casilla está revelada
+                } else {
+                    System.out.print("X "); // Muestra una 'X' si la casilla está oculta
+                }
+            }
+            System.out.println(); // Salta a la siguiente línea después de cada fila
+        }
+        System.out.println("");
+        System.out.println("");
+    }
+
+    private static void revelar(int fila, int columna) {
+        revelados[fila][columna] = true; // Marca la casilla como revelada
+    }
+
+    private static void tapar(int fila, int columna) {
+        revelados[fila][columna] = false; // Marca la casilla como oculta
+    }
+
+    private static boolean juegoTerminado() {
+        for (int i = 0; i < 4; i++) { // Recorre cada fila del tablero
+            for (int j = 0; j < 4; j++) { // Recorre cada columna del tablero
+                if (!revelados[i][j]) {
+                    return false; // Si encuentra una casilla no revelada, el juego continúa
+                }
+            }
+        }
+        return true; // Si todas las casillas están reveladas, el juego ha terminado
+    }
+}
