@@ -311,7 +311,7 @@ public class Main {
                 do {
                     nuevafilapocimaVader = randomizar.nextInt(MAX_FILA);
                     nuevacolumnapocimaVader = randomizar.nextInt(MAX_COLUMNA);
-                }while (tableroVader[nuevafilapocimaVader][nuevacolumnapocimaVader] != vacio); // REPETIMOS HASTA QUE ESTÉN VACÍAS, COMO YA TENEMOS UN YODA NO HACE FALTA PONER OTRO EN OTRA COLUMNA RANDOM, SIMPLEMENTE VAMOS A APUNTAR A UN LUGAR DE LA MATRIZ Y DEPOSITAR AHÍ NUESTRA VIEJA VARIABLE, ME EXPLICO.
+                }while (tableroVader[nuevafilapocimaVader][nuevacolumnapocimaVader] != vacio || tableroVader[nuevafilapocimaVader][nuevacolumnapocimaVader] != r2d2); // REPETIMOS HASTA QUE ESTÉN VACÍAS, COMO YA TENEMOS UN YODA NO HACE FALTA PONER OTRO EN OTRA COLUMNA RANDOM, SIMPLEMENTE VAMOS A APUNTAR A UN LUGAR DE LA MATRIZ Y DEPOSITAR AHÍ NUESTRA VIEJA VARIABLE, ME EXPLICO.
                 // DEVOLVEMOS LAS VARIABLES A LAS ORIGINALES PARA QUE EL PROGRAMA SIGA SU CURSO YA QUE ESTAS SOLO FUNCIONAN A MODO TEMPORAL, NO SIEMPRE
                 nuevafilaVader = nuevafilapocimaVader;
                 nuevacolumnaVader = nuevacolumnapocimaVader;
