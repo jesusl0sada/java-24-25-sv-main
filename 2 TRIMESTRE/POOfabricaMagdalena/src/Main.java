@@ -1,12 +1,13 @@
-import pojo.Magdalena;
-import pojo.MagdalenaFactory;
-import pojo.Pedido;
-import pojo.Producto;
-
+import pojo.*;
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
+
     public static void main(String[] args) {
+
+
+        // PRODUCTO
 
         Producto magdalena = new Producto("Magdalena de chocolate", 1.50, 10);
         Producto croissant = new Producto("Croissant", 1.20, 5);
@@ -22,6 +23,18 @@ public class Main {
         System.out.println(helado.toString());
         // DE MOMENTO MOSTRAR INFORMACIÓN CON TO STRING, IMPORTANTE PONERLE SOUT
         // YA QUE SE IMPRIME
+
+
+        //ALMACÉN
+
+        Almacen almacen = new Almacen();
+        almacen.meterproductoInventario(croissant);
+        almacen.meterproductoInventario(galleta);
+        almacen.meterproductoInventario(napolitana);
+        almacen.meterproductoInventario(helado);
+        almacen.meterproductoInventario(magdalena);
+
+        almacen.mostrarProductosInventario();
 
         // PEDIDO
         Pedido pedido = new Pedido(5);
@@ -45,6 +58,12 @@ public class Main {
         factory.crearMagdalena(magdalena4);
 
         factory.printMagdalena();
+
+        Scanner lector = new Scanner(System.in);
+
+        almacen.buscarproductoInventario(lector.nextLine());
+
+
 
 
         /*Magdalena[] listaMagdalenas = new Magdalena[10];
