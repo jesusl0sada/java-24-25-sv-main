@@ -35,9 +35,11 @@ public class Main {
         //ELIMINAR CANCIONES
         almacenMusica.deleteCancion(cancion3);
         almacenMusica.deleteCancion(cancion4);
+        almacenMusica.deleteCancion(cancion5);
 
         //IMPRESIÓN
         System.out.println("Post eliminar canciones...");
+        System.out.println("LISTA DEFINITIVA DE CANCIONES:");
         almacenMusica.imprimir(); // -> esta función en la clase almacen musica tendrá que recorrer el arraylist con un foreach y meter un toString.
 
         }

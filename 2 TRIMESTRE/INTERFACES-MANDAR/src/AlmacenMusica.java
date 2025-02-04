@@ -17,16 +17,20 @@ public class AlmacenMusica implements IEstanteria {
 
     @Override
     public void addCancion(Cancion cancion) {
-    listaCanciones.add(cancion); // Nos permitirá meter un objeto de tipo Cancion (en este caso llamado cancion, eso es irrelevante)
-        System.out.println("Canción añadida con éxito, la canción que has añadido es... " + cancion );
-    }
+            listaCanciones.add(cancion); // Nos permitirá meter un objeto de tipo Cancion (en este caso llamado cancion, eso es irrelevante)
+            System.out.println("Canción añadida con éxito, la canción que has añadido es... " + cancion);
+        }
+
+
 
     public void updateCancion(Cancion cancion, String nuevoTitulo, String nuevoAutor, String nuevoGenero) {
-        for (Cancion miCancion : listaCanciones) {
+        for (Cancion miCancion : this.listaCanciones) {
+
+            // RECORREMOS Y BUSCAMOS LA CANCION CON GET - > NO PODREMOS ACTUALIZAR LOS DATOS DE UNA CANCIÓN QUE NO ESTÉ EN EL ALMACÉN.
             if (miCancion.getTitulo().equals(cancion.getTitulo()) &&
                     miCancion.getAutor().equals(cancion.getAutor())) {
 
-                // Modificamos los valores dentro del mismo objeto
+                // Modificamos los valores CON SET !
                 System.out.println("La canción a actualizar va a ser: " + cancion);
                 miCancion.setTitulo(nuevoTitulo);
                 miCancion.setAutor(nuevoAutor);
@@ -40,7 +44,8 @@ public class AlmacenMusica implements IEstanteria {
 
     @Override
     public void deleteCancion(Cancion cancion) {
-    listaCanciones.remove(cancion);
+    this.listaCanciones.remove(cancion);
+        System.out.println("Has eliminado la cancion... " + cancion + "...");
     }
 
     @Override
