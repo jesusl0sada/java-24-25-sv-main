@@ -38,7 +38,7 @@ public abstract class Pokemon implements IAtaque, IDefensa {
         int danioAtaque = getPrimerMovimientoAtaque().getDanio();
 
         // Anunciamos el ataque
-        if (this instanceof PokemonAgua && oponente instanceof PokemonFuego){
+        if (this instanceof PokemonAgua || oponente instanceof PokemonFuego){
             System.out.println("Debilidad de tipo activada");
             int danioAtaqueduplicado = danioAtaque*2;
             System.out.println("Le has pegado : " + danioAtaqueduplicado);
