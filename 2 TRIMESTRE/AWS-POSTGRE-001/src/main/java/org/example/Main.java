@@ -16,7 +16,7 @@ public class Main {
     // Ajusta con la URL, usuario y pass de tu instancia de PostgreSQL
     public static final String URLPostgre = "jdbc:postgresql://disney.cnanbt27k03l.us-east-1.rds.amazonaws.com:5432/postgres";
     public static final String USERPostgre = "postgres";
-    public static final String PASSPostgre = "Ganadores2025";
+    public static final String PASSPostgre = "Mondongo69";
 
     // Conexión a la base de datos
     public static void connect() {

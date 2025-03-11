@@ -1,11 +1,11 @@
 package org.example;
 
 public class Pelicula {
-    private int id;
-    private String titulo;
-    private String director;
-    private int anio;
-    private Genero genero;  // Objeto Genero
+    protected int id;
+    protected String titulo;
+    protected String director;
+    protected int anio;
+    protected Genero genero;  // Objeto Genero
 
     public Pelicula(int id, String titulo, String director, int anio, Genero genero) {
         this.id = id;
