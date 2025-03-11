@@ -1,49 +1,87 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // 1. Conectar a la base de datos
+        // 1) Conectar a la base de datos
         Singleton.getInstance();
 
-        // 2. Crear instancias de DAO para películas y géneros
+        // 2) Crear instancias de DAO para películas y géneros
         PeliculaDAO peliculaDAO = new PeliculaDAO();
         GeneroDAO generoDAO = new GeneroDAO();
 
         // ------------------------ CASOS DE USO ------------------------ //
 
-        // 1. Insertar nuevos géneros
-        //Genero fantasia = new Genero(7, "Fantasia");
+        // 1) Insertar nuevos géneros (si la base de datos está vacía)
+        System.out.println("Insertando géneros...");
+        Genero accion = new Genero(1, "Acción");
+        Genero comedia = new Genero(2, "Comedia");
         Genero drama = new Genero(3, "Drama");
+        Genero fantasia = new Genero(4, "Fantasía");
 
-        //generoDAO.add(fantasia);
-        generoDAO.add(drama);
+        // Descomenta para insertar
+        // generoDAO.add(accion);
+        // generoDAO.add(comedia);
+        // generoDAO.add(drama);
+        // generoDAO.add(fantasia);
 
-
-        // 2. Listar todos los géneros
+        // 2) Listar todos los géneros disponibles
+        System.out.println("Lista de géneros disponibles:");
         generoDAO.findAll();
 
-        // 3. Insertar nuevas películas
-        Pelicula pelicula1 = new Pelicula(6, "Los mundos de Yupi", "Alberto Akkari", 2008, drama);
-        Pelicula pelicula2 = new Pelicula(7, "Se7en", "Daniel Lalanza", 2004, drama);
-        peliculaDAO.add(pelicula1);
-        peliculaDAO.add(pelicula2);
+        // 3) Insertar nuevas películas de dos maneras
 
-        // 4. Listar todas las películas
+        // Opción 1: Crear películas con Factory
+        System.out.println("Creando películas con Factory...");
+        Pelicula peliculaFactory1 = PeliculaFactory.crearPelicula(0, "Duro de Matar", "John McTiernan", 1988, accion);
+        Pelicula peliculaFactory2 = PeliculaFactory.crearPelicula(0, "Scary Movie", "Keenen Ivory Wayans", 2000, comedia);
+
+        // Descomenta para insertar
+        // peliculaDAO.add(peliculaFactory1);
+        // peliculaDAO.add(peliculaFactory2);
+
+        // Opción 2: Crear películas manualmente sin Factory
+        System.out.println("Creando películas de forma manual...");
+        Pelicula peliculaManual1 = new Pelicula(0, "Matrix", "Lana Wachowski", 1999, accion);
+        Pelicula peliculaManual2 = new Pelicula(0, "Superbad", "Greg Mottola", 2007, comedia);
+
+        // Descomenta para insertar
+        // peliculaDAO.add(peliculaManual1);
+        // peliculaDAO.add(peliculaManual2);
+
+        // 4) Listar todas las películas
+        System.out.println("Lista de todas las películas:");
         peliculaDAO.findAll();
 
-        // 5. Buscar una película por ID
+        // 5) Buscar una película por ID
+        System.out.println("Buscando película con ID = 1...");
         peliculaDAO.find(1);
 
-        // 6. Actualizar una película
-        //Pelicula peliculaActualizada = new Pelicula(1, "Gladiator (Remastered)", "Ridley Scott", 2000, fantasia);
-        //peliculaDAO.update(peliculaActualizada);
+        // 6) Actualizar una película (ejemplo: cambiar el título de ID 1)
+        System.out.println("Actualizando película con ID = 1...");
+        Pelicula peliculaActualizada = new Pelicula(1, "Duro de Matar (Remastered)", "John McTiernan", 1988, accion);
 
-        // 7. Eliminar una película por ID
-        //peliculaDAO.delete();
+        // Descomenta para actualizar
+        // peliculaDAO.update(peliculaActualizada);
 
-        // 8. Listar las películas después de los cambios
+        // 7) Eliminar una película (ejemplo: eliminar ID 2)
+        System.out.println("Eliminando película con ID = 2...");
+
+        // Descomenta para eliminar
+        // peliculaDAO.delete(2);
+
+        // 8) Volver a listar películas después de los cambios
+        System.out.println("Lista de películas después de cambios:");
         peliculaDAO.findAll();
 
-        // QUÉ PELICULAS SON DE TIPO FANTASÍA -> FILTRAR POR GENERO, LO METES ENTRE PARÉNTESIS. 
+        // 9) Filtrar películas por género (entrada del usuario)
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Introduce el género para buscar películas: ");
+        String generoBuscado = scanner.nextLine();
+        peliculaDAO.findByGenero(generoBuscado);
+
+        // 10) Cerrar conexión al finalizar
+        Singleton.getInstance().closeConnection();
     }
 }

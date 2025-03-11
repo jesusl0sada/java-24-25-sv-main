@@ -13,9 +13,9 @@ public class GeneroDAO {
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, genero.getNombre());
             ps.executeUpdate();
-            System.out.println("✅ Género agregado: " + genero.getNombre());
+            System.out.println("Género agregado: " + genero.getNombre());
         } catch (SQLException e) {
-            System.out.println("❌ Error al agregar el género: " + e.getMessage());
+            System.out.println("Error al agregar el género: " + e.getMessage());
         }
     }
 
@@ -25,12 +25,12 @@ public class GeneroDAO {
         try (PreparedStatement ps = conn.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
 
-            System.out.println("📂 Lista de Géneros:");
+            System.out.println("Lista de Géneros:");
             while (rs.next()) {
-                System.out.println("   • ID: " + rs.getInt("id") + " | Nombre: " + rs.getString("nombre"));
+                System.out.println(" ID: " + rs.getInt("id") + " | Nombre: " + rs.getString("nombre"));
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error al listar los géneros: " + e.getMessage());
+            System.out.println("Error al listar los géneros: " + e.getMessage());
         }
     }
 }

@@ -23,9 +23,9 @@ public class Singleton {
             properties.setProperty("ssl", "false");
 
             connection = DriverManager.getConnection(URL, properties);
-            System.out.println("✅ Conexión establecida en Singleton");
+            System.out.println("Conexión establecida en Singleton");
         } catch (SQLException e) {
-            System.out.println("❌ Error al conectar: " + e.getMessage());
+            System.out.println("Error al conectar: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -47,15 +47,15 @@ public class Singleton {
         return connection;
     }
 
-    // 🚀 NUEVO: Método para cerrar la conexión al finalizar el programa
+    // Método para cerrar la conexión al finalizar el programa
     public void closeConnection() {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("🔴 Conexión cerrada correctamente.");
+                System.out.println("Conexión cerrada correctamente.");
             }
         } catch (SQLException e) {
-            System.out.println("❌ Error al cerrar la conexión: " + e.getMessage());
+            System.out.println("Error al cerrar la conexión: " + e.getMessage());
         }
     }
 }
