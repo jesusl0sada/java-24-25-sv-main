@@ -29,7 +29,7 @@ public abstract class Nave implements IAtaque, IDefensa {
     //MÉTODOS: HEREDAN OTROS...
 
     ArmaAtaque getArmaAtaque(){
-        return null;
+       return null;
     }
 
     ArmaDefensa getArmaDefensa(){
